@@ -52,14 +52,14 @@ export default function BookingScreen() {
       Alert.alert('Erreur', 'Veuillez sélectionner le problème de votre vélo');
       return;
     }
-    if (selectedProblem === 'Autre / Other' && !customProblem.trim()) {
+    if (selectedProblem === 'Autre' && !customProblem.trim()) {
       Alert.alert('Erreur', 'Veuillez décrire le problème');
       return;
     }
 
     setLoading(true);
     try {
-      const problem = selectedProblem === 'Autre / Other' ? customProblem : selectedProblem;
+      const problem = selectedProblem === 'Autre' ? customProblem : selectedProblem;
       
       await addAppointment({
         address: address.trim(),
@@ -155,6 +155,9 @@ export default function BookingScreen() {
         {/* Time Slots */}
         <View style={styles.section}>
           <Text style={styles.label}>Créneau horaire *</Text>
+          <Text style={styles.availabilityNote}>
+            Disponible de 16h30 à 19h00
+          </Text>
           <View style={styles.timeSlotsContainer}>
             {timeSlots.map((slot) => (
               <Pressable
@@ -205,7 +208,7 @@ export default function BookingScreen() {
               </Pressable>
             ))}
           </View>
-          {selectedProblem === 'Autre / Other' && (
+          {selectedProblem === 'Autre' && (
             <TextInput
               style={[styles.input, styles.customProblemInput]}
               placeholder="Décrivez le problème..."
@@ -270,6 +273,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: colors.text,
     marginBottom: 12,
+  },
+  availabilityNote: {
+    fontSize: 13,
+    color: colors.textSecondary,
+    marginBottom: 8,
+    fontStyle: 'italic',
   },
   inputContainer: {
     flexDirection: 'row',

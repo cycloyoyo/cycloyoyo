@@ -3,16 +3,25 @@ import { TimeSlot } from '@/types/appointment';
 
 export const generateTimeSlots = (date: Date): TimeSlot[] => {
   const slots: TimeSlot[] = [];
-  const startHour = 9; // 9 AM
-  const endHour = 18; // 6 PM
+  const startHour = 16; // 16h00
+  const startMinute = 30; // 16h30
+  const endHour = 19; // 19h00
   
-  for (let hour = startHour; hour < endHour; hour++) {
+  // Ajouter le premier créneau à 16h30
+  slots.push({
+    id: `${date.toISOString()}-16:30`,
+    time: '16:30',
+    available: true,
+  });
+  
+  // Ajouter les créneaux de 17h00 à 19h00
+  for (let hour = 17; hour < endHour; hour++) {
     for (let minute = 0; minute < 60; minute += 30) {
       const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
       slots.push({
         id: `${date.toISOString()}-${timeString}`,
         time: timeString,
-        available: true, // In a real app, this would check against existing bookings
+        available: true, // Dans une vraie application, cela vérifierait les réservations existantes
       });
     }
   }
@@ -21,12 +30,12 @@ export const generateTimeSlots = (date: Date): TimeSlot[] => {
 };
 
 export const bikeProblems = [
-  'Crevaison / Flat tire',
-  'Freins défectueux / Brake issues',
-  'Chaîne cassée / Broken chain',
-  'Dérailleur / Derailleur problems',
-  'Roue voilée / Wheel alignment',
-  'Pneus usés / Worn tires',
-  'Entretien général / General maintenance',
-  'Autre / Other',
+  'Crevaison',
+  'Freins défectueux',
+  'Chaîne cassée',
+  'Dérailleur',
+  'Roue voilée',
+  'Pneus usés',
+  'Entretien général',
+  'Autre',
 ];
