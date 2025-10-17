@@ -57,9 +57,9 @@ export default function HomeScreen() {
         <Animated.View entering={FadeInDown.duration(600)} style={styles.hero}>
           <View style={styles.heroIcon}>
             <Image
-              source={{ uri: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=200&h=200&fit=crop' }}
+              source={require('@/assets/images/222d8833-e34c-4d40-8609-66b1a5010e49.jpeg')}
               style={styles.logoImage}
-              resizeMode="cover"
+              resizeMode="contain"
             />
           </View>
           <Text style={styles.heroTitle}>Réparation de vélo à domicile</Text>
