@@ -21,16 +21,19 @@ export default function HomeScreen() {
       icon: 'wrench.fill',
       title: 'Réparation rapide',
       description: 'Intervention à domicile en 48h',
+      showWrenchImage: true,
     },
     {
       icon: 'gear',
       title: 'Entretien complet',
       description: 'Révision et maintenance',
+      showWrenchImage: false,
     },
     {
       icon: 'clock.fill',
       title: 'Disponibilité',
       description: 'Du lundi au samedi, 9h-18h',
+      showWrenchImage: false,
     },
   ];
 
@@ -53,7 +56,11 @@ export default function HomeScreen() {
         {/* Hero Section */}
         <Animated.View entering={FadeInDown.duration(600)} style={styles.hero}>
           <View style={styles.heroIcon}>
-            <IconSymbol name="bicycle" size={64} color={colors.card} />
+            <Image
+              source={{ uri: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=200&h=200&fit=crop' }}
+              style={styles.logoImage}
+              resizeMode="cover"
+            />
           </View>
           <Text style={styles.heroTitle}>Réparation de vélo à domicile</Text>
           <Text style={styles.heroSubtitle}>
@@ -80,6 +87,15 @@ export default function HomeScreen() {
               <View key={index} style={styles.serviceCard}>
                 <View style={styles.serviceIcon}>
                   <IconSymbol name={service.icon as any} size={32} color={colors.primary} />
+                  {service.showWrenchImage && (
+                    <View style={styles.wrenchBadge}>
+                      <Image
+                        source={{ uri: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=100&h=100&fit=crop' }}
+                        style={styles.wrenchImage}
+                        resizeMode="contain"
+                      />
+                    </View>
+                  )}
                 </View>
                 <Text style={styles.serviceTitle}>{service.title}</Text>
                 <Text style={styles.serviceDescription}>{service.description}</Text>
@@ -138,7 +154,7 @@ export default function HomeScreen() {
           </Text>
           <View style={styles.contactInfo}>
             <IconSymbol name="phone.fill" size={20} color={colors.primary} />
-            <Text style={styles.contactPhone}>+33 1 23 45 67 89</Text>
+            <Text style={styles.contactPhone}>06.60.09.93.22</Text>
           </View>
         </Animated.View>
       </ScrollView>
@@ -178,6 +194,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
+    overflow: 'hidden',
+  },
+  logoImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 60,
   },
   heroTitle: {
     fontSize: 28,
@@ -243,6 +265,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
+    position: 'relative',
+  },
+  wrenchBadge: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: colors.secondary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: colors.card,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4,
+  },
+  wrenchImage: {
+    width: 16,
+    height: 16,
+    tintColor: colors.card,
   },
   serviceTitle: {
     fontSize: 18,
